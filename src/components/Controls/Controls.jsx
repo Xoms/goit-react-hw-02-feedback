@@ -3,13 +3,30 @@ import PropTypes from 'prop-types';
 import { StyledControls } from './Controls.styles';
 import  Button  from '../shared/Button';
 
-const Controls = ({onLeaveFeedback}) => (
-  <StyledControls>
-        <Button caption="Good" handleClick = {()=> onLeaveFeedback('good')}></Button>
-        <Button caption="Neutral" handleClick = {()=> onLeaveFeedback('neutral')}></Button>
-        <Button caption="Bad" handleClick = {()=> onLeaveFeedback('bad')}></Button>
-  </StyledControls>
-);
+const Controls = ({onLeaveFeedback}) => {
+  const buttonsArr = [
+    {
+      id: "good",
+      caption: "Good"
+    },
+    {
+      id: "neutral",
+      caption: "Neutral"
+    },
+    {
+      id: "bad",
+      caption: "Bad"
+    },
+
+]
+  return(
+    <StyledControls>
+          {buttonsArr.map( ({id, ...rest}) =>
+            <Button key={id} id={id} {...rest} handleClick = {onLeaveFeedback}/>
+          )}
+    </StyledControls>
+  )
+};
 
 Controls.propTypes = {
   onLeaveFeedback: PropTypes.func.isRequired,
